@@ -80,7 +80,7 @@ class NavigationDrawer : AppCompatActivity() {
         mService.getCityList().enqueue(object: Callback<MutableList<City>> {
             override fun onFailure(call: Call<MutableList<City>>, t: Throwable) {}
 
-            override fun onResponse(call: Call<MutableList<City>>, response: Response<MutableList<City>) {
+            override fun onResponse(call: Call<MutableList<City>>, response: Response<MutableList<City>>) {
                 adapter = RecyclerAdapter(baseContext, response.body() as MutableList<City>)
                 adapter.notifyDataSetChanged()
 
