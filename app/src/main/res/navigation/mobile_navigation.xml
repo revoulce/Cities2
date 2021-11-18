@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_cities">
+
+    <fragment
+        android:id="@+id/nav_cities"
+        android:name="ru.sfedu.cities2.ui.cities.CitiesFragment"
+        android:label="@string/menu_cities"
+        tools:layout="@layout/fragment_cities" >
+        <action
+            android:id="@+id/action_nav_cities_to_nav_city"
+            app:destination="@id/nav_city" >
+            <argument
+                android:name="cityName"
+                android:defaultValue="lol" />
+            </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_city"
+        android:name="ru.sfedu.cities2.ui.city.CityFragment"
+        android:label="@string/menu_city"
+        tools:layout="@layout/fragment_city" >
+        <argument
+            android:name="cityName"
+            app:argType="string"
+            android:defaultValue="lol" />
+        <action
+            android:id="@id/action_nav_cities_to_nav_city"
+            app:destination="@id/nav_city" />
+    </fragment>
+
+</navigation>
