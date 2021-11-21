@@ -4,8 +4,8 @@
     <string name="navigation_drawer_close">Закрыть панель навигации</string>
     <string name="nav_header_desc">Заголовок навигации</string>
     <string name="action_settings">Настройки</string>
-    <string name="menu_cities">Города</string>
-    <string name="menu_city">Город</string>
+    <string name="menu_cities">Список городов</string>
+    <string name="menu_city">Выбранный город</string>
     <string name="app_logo">Логотип приложения</string>
     <string name="password">Пароль</string>
     <string name="login">Войти</string>
@@ -15,4 +15,5 @@
     <string name="country_name">Страна: %1$s</string>
     <string name="language_name">Национальный язык: %1$s</string>
     <string name="population">Численность населения: %1$d</string>
+    <string name="menu_refresh">Обновить</string>
 </resources>

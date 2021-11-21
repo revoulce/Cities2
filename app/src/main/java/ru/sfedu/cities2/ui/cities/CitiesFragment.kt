@@ -3,15 +3,14 @@ package ru.sfedu.cities2.ui.cities
 import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import dmax.dialog.SpotsDialog
 import retrofit2.Call
 import retrofit2.Callback
@@ -35,6 +34,7 @@ class CitiesFragment : Fragment() {
     private lateinit var adapter: RecyclerAdapter
     private lateinit var dialog: AlertDialog
     private lateinit var navController: NavController
+    private var sort: Int? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -56,7 +56,11 @@ class CitiesFragment : Fragment() {
         dialog = SpotsDialog.Builder().setCancelable(true).setContext(this.context).build()
         navController = findNavController()
 
-        getAllCityList()
+        if (sort != null) {
+            sort = 1
+        }
+
+        getAllCityList(1)
 
         return binding.root
     }
@@ -66,7 +70,23 @@ class CitiesFragment : Fragment() {
         _binding = null
     }
 
-    private fun getAllCityList() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val swipeRefreshLayout = view.findViewById<SwipeRefreshLayout>(R.id.swiperefresh)
+        swipeRefreshLayout.setOnRefreshListener {
+            when (sort) {
+                1 -> sort = 2
+                2 -> sort = 1
+                else -> sort = 1
+            }
+
+            sort?.let { getAllCityList(it) }
+            swipeRefreshLayout.isRefreshing = false
+        }
+    }
+
+    private fun getAllCityList(sortType: Int) {
         dialog.show()
         mService.getCityList().enqueue(object : Callback<MutableList<City>> {
             override fun onFailure(call: Call<MutableList<City>>, t: Throwable) {}
@@ -76,6 +96,11 @@ class CitiesFragment : Fragment() {
                 response: Response<MutableList<City>>
             ) {
                 val cityList = response.body() as MutableList<City>
+
+                when (sortType) {
+                    1 -> cityList.sortBy { it.name }
+                    2 -> cityList.sortByDescending { it.name }
+                }
 
                 adapter = RecyclerAdapter(activity.baseContext, cityList, navController)
                 adapter.notifyDataSetChanged()
