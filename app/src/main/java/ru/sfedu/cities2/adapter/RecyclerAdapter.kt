@@ -1,4 +1,4 @@
-package ru.sfedu.cities2
+package ru.sfedu.cities2.adapter
 
 import android.content.Context
 import android.os.Bundle
@@ -6,13 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
+import ru.sfedu.cities2.R
 import ru.sfedu.cities2.model.City
-import ru.sfedu.cities2.ui.cities.CitiesFragment
 
-class RecyclerAdapter(private val context: Context, private val cityList: MutableList<City>, private val fragment: Fragment) :
+class RecyclerAdapter(
+    private val context: Context,
+    private val cityList: MutableList<City>,
+    private val navController: NavController
+) :
     RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -21,21 +24,14 @@ class RecyclerAdapter(private val context: Context, private val cityList: Mutabl
         fun bind(listItem: City) {
             itemView.setOnClickListener {
                 val bundle = Bundle()
-                bundle.putString("cityName", itemCity.text.toString())
+                listItem.name?.let { it1 -> bundle.putString("cityName", it1) }
+                listItem.country?.let { it2 -> bundle.putString("countryName", it2) }
+                listItem.language?.let { it3 -> bundle.putString("languageName", it3) }
+                listItem.population?.let { it4 -> bundle.putInt("population", it4) }
 
-                fragment.findNavController().navigate(R.id.action_nav_cities_to_nav_city, bundle)
+                navController.navigate(R.id.action_nav_cities_to_nav_city, bundle)
             }
         }
-
-//        init {
-//            itemView.setOnClickListener {
-//                val bundle = Bundle()
-//                bundle.putString("cityName", itemCity.text.toString())
-//
-//                fragment.findNavController()
-//                    .navigate(R.id.action_nav_cities_to_nav_city, bundle)
-//            }
-//        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -47,7 +43,9 @@ class RecyclerAdapter(private val context: Context, private val cityList: Mutabl
         val listItem = cityList[position]
         holder.bind(listItem)
 
-        holder.itemCity.text = cityList[position].name
+        listItem.name?.let { it1 -> holder.itemCity.text = it1 }
+
+
     }
 
     override fun getItemCount(): Int {

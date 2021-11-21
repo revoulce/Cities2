@@ -5,8 +5,8 @@
     android:id="@+id/layout_cities"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.cities.CitiesFragment"
-    android:background="@color/emperor">
+    android:background="@color/emperor"
+    tools:context=".ui.cities.CitiesFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cities_list"

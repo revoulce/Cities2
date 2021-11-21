@@ -9,28 +9,46 @@
         android:id="@+id/nav_cities"
         android:name="ru.sfedu.cities2.ui.cities.CitiesFragment"
         android:label="@string/menu_cities"
-        tools:layout="@layout/fragment_cities" >
+        tools:layout="@layout/fragment_cities">
         <action
             android:id="@+id/action_nav_cities_to_nav_city"
-            app:destination="@id/nav_city" >
+            app:destination="@id/nav_city">
             <argument
                 android:name="cityName"
                 android:defaultValue="lol" />
-            </action>
+            <argument
+                android:name="countryName"
+                android:defaultValue="lol" />
+            <argument
+                android:name="languageName"
+                android:defaultValue="lol" />
+            <argument
+                android:name="population"
+                android:defaultValue="420" />
+        </action>
     </fragment>
 
     <fragment
         android:id="@+id/nav_city"
         android:name="ru.sfedu.cities2.ui.city.CityFragment"
         android:label="@string/menu_city"
-        tools:layout="@layout/fragment_city" >
+        tools:layout="@layout/fragment_city">
         <argument
             android:name="cityName"
-            app:argType="string"
-            android:defaultValue="lol" />
-        <action
-            android:id="@id/action_nav_cities_to_nav_city"
-            app:destination="@id/nav_city" />
+            android:defaultValue="lol"
+            app:argType="string" />
+        <argument
+            android:name="countryName"
+            android:defaultValue="lol"
+            app:argType="string" />
+        <argument
+            android:name="languageName"
+            android:defaultValue="lol"
+            app:argType="string" />
+        <argument
+            android:name="population"
+            android:defaultValue="420"
+            app:argType="integer" />
     </fragment>
 
 </navigation>

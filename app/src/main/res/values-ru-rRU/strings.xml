@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="navigation_drawer_open">Открыть панель навигации</string>
+    <string name="navigation_drawer_close">Закрыть панель навигации</string>
+    <string name="nav_header_desc">Заголовок навигации</string>
+    <string name="action_settings">Настройки</string>
+    <string name="menu_cities">Города</string>
+    <string name="menu_city">Город</string>
+    <string name="app_logo">Логотип приложения</string>
+    <string name="password">Пароль</string>
+    <string name="login">Войти</string>
+    <string name="empty_email">Пожалуйста введите почту</string>
+    <string name="empty_password">Пожалуйста введите пароль</string>
+    <string name="invalid_email">Пожалуйста укажите верную почту</string>
+    <string name="country_name">Страна: %1$s</string>
+    <string name="language_name">Национальный язык: %1$s</string>
+    <string name="population">Численность населения: %1$d</string>
+</resources>

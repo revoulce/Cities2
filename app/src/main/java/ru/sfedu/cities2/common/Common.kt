@@ -1,10 +1,11 @@
 package ru.sfedu.cities2.common
 
-import ru.sfedu.cities2.`interface`.RetrofitServieces
+import ru.sfedu.cities2.`interface`.RetrofitServices
 import ru.sfedu.cities2.retrofit.RetrofitClient
 
 object Common {
-    private val BASE_URL = "https://raw.githubusercontent.com/Lpirskaya/JsonLab/master/City.json"
+    private const val BASE_URL = "https://raw.githubusercontent.com/"
 
-    val retrofitService: RetrofitServieces get() = RetrofitClient.getClient(BASE_URL).create(RetrofitServieces::class.java)
+    val retrofitService: RetrofitServices
+        get() = RetrofitClient.getClient(BASE_URL).create(RetrofitServices::class.java)
 }

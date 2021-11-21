@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import ru.sfedu.cities2.NavigationDrawer
 import ru.sfedu.cities2.R
@@ -47,17 +46,39 @@ class CityFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val cityName = view.findViewById<TextView>(R.id.text_city)
+        val cityNameView = view.findViewById<TextView>(R.id.text_city)
+        val countryNameView = view.findViewById<TextView>(R.id.text_country)
+        val languageNameView = view.findViewById<TextView>(R.id.text_language)
+        val populationView = view.findViewById<TextView>(R.id.text_population)
+
         val bundle = arguments
 
         if (bundle != null) {
             val city = bundle.getString("cityName").toString()
+            val country = bundle.getString("countryName").toString()
+            val language = bundle.getString("languageName").toString()
+            val population = bundle.getInt("population")
 
             if (city != "lol") {
                 activity.lastCity = city
             }
+
+            if (country != "lol") {
+                activity.lastCountry = country
+            }
+
+            if (language != "lol") {
+                activity.lastLanguage = language
+            }
+
+            if (population != 420) {
+                activity.lastPopulation = population
+            }
         }
 
-        cityName.text = activity.lastCity
+        cityNameView.text = activity.lastCity
+        countryNameView.text = getString(R.string.country_name, activity.lastCountry)
+        languageNameView.text = getString(R.string.language_name, activity.lastLanguage)
+        populationView.text = getString(R.string.population, activity.lastPopulation)
     }
 }

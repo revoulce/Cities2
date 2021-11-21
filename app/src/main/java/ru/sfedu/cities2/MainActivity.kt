@@ -2,10 +2,10 @@ package ru.sfedu.cities2
 
 import android.content.Intent
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var etEmail: EditText
@@ -37,24 +37,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun validateInput(): Boolean {
         if (etEmail.text.toString().isEmpty()) {
-            etEmail.error = resources.getString(R.string.empty_email)
+            etEmail.error = getString(R.string.empty_email)
             etEmail.setTextColor(Color.RED)
 
             return false
         }
 
         if (etPassword.text.toString().isEmpty()) {
-            etPassword.error = resources.getString(R.string.empty_password)
+            etPassword.error = getString(R.string.empty_password)
             etPassword.setTextColor(Color.RED)
 
-            return false
-        }
-
-        if (etPassword.text.length < _minPasswordLength) {
-            etPassword.error =
-                resources.getString(R.string.short_password1) + " " + _minPasswordLength + " " + getString(
-                    R.string.short_password2
-                )
             return false
         }
 
